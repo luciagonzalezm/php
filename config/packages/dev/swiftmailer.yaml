@@ -1,0 +1,4 @@
+# config/packages/dev/swiftmailer.yaml
+swiftmailer:
+  delivery_addresses: ['lgonzalezm59@informatica.iesvalledeljerteplasencia.es']
+
