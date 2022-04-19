@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <!-- Principal Content Start -->
+    <div id="asociados">
+        <div class="container">
+            <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                <h1>ASOCIADOS</h1>
+                <hr>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            {{ form(formulario) }}
+                        </div>
+                    </div>
+                </div>
+                <hr class="divider">
+                {% for message in app.flashes('exito') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <br>
+                <br>
+                <div class="asociados">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Logo</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%  for asociado in asociados %}
+                            <tr>
+                                <th scope="row">{{ asociado.id }}</th>
+                                <td>{{ asociado.nombre }}</td>
+                                <td>
+                                    <img src="{{ asset('images/index/'~asociado.logo) }}"
+                                         alt="{{ asociado.descripcion }}"
+                                         title="{{ asociado.descripcion }}"
+                                         width="100px"
+                                    >
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Principal Content Start -->
+{% endblock %}

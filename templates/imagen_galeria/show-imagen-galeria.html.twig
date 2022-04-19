@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <!-- Principal Content Start -->
+    {%  for imagen in imagenes %}
+        <div id="galeria">
+            <div class="container">
+                <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                    <h1>IMAGEN DE LA GALERIA</h1>
+                    <hr>
+                    <div class="imagenes_galeria">
+                        <img src="{{ asset('images/index/gallery/'~imagen.nombre) }}"
+                             alt="{{ imagen.descripcion() }}"
+                             title="{{ imagen.descripcion }}"
+                             width="610px"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <!-- Principal Content Start -->
+{% endblock %}

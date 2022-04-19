@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}PhotographItem-Responsive Theme{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    {% endblock %}
+</head>
+<body id="page-top">
+{% block body %}
+    {% set currentPath = path(app.request.attributes.get('_route'),
+        app.request.attributes.get('_route_params')) %}
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a  class="navbar-brand page-scroll" href="#page-top">
+                    <span>[PHOTO]</span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="{{ currentPath is same as('/') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/') ? '#' : path('dashboard') }}"><i class="fa fa-home sr-icons"></i> Home</a></li>
+                    <li class="{{ currentPath is same as('/about') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/about') ? '#' : path('about') }}"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
+                    <li class="{{ currentPath is same as('/blog') or currentPath is same as('/post') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/blog') ? '#' : path('blog') }}"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
+                    <li class="{{ currentPath is same as('/contact') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/contact') ? '#' : path('contact') }}"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
+                    {% if app.user is same as(null) %}
+                        <li class="{{ currentPath is same as('/login') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/login') ? '#' : path('app_login') }}"><i class="fa fa-sign-in sr-icons"></i> Login</a></li>
+                        <li class="{{ currentPath is same as('/registro') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/registro') ? '#' : path('registro') }}"><i class="fa fa-user-secret sr-icons"></i> Registro</a></li>
+                    {% else %}
+                        <li class="{{ currentPath is same as('/imagenes-galeria') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/imagenes-galeria') ? '#' : path('imagenes_galeria') }}"><i class="fa fa-image sr-icons"></i> Galería</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="{{ currentPath is same as('/asociados') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/asociados') ? '#' : path('asociados') }}"><i class="fa fa-hand-o-right sr-icons"></i> Asociados</a></li>
+                        {% endif %}
+                        <li class="{{ currentPath is same as('/logout') ? 'active' : '' }} lien"><a href="{{ currentPath is same as('/logout') ? '#' : path('app_logout') }}"><i class="fa fa-sign-out sr-icons"></i> {{ app.user.username }} Salir</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navigation Bar -->
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/scrollreveal.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+{% endblock %}
+</body>
+</html>

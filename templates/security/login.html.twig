@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <!-- Principal Content Start -->
+    <div id="login">
+        <div class="container">
+            <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                <h1>LOGIN</h1>
+                <hr>
+                {% if app.user %}
+                    <div class="mb-3">
+                        Has iniciado sesión como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Salir</a>
+                    </div>
+                {% endif %}
+                <br>
+                <form class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label for="inputUsername">Username</label>
+                            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" required>
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+                        </div>
+                    </div>
+                    <button class="btn btn-lg btn-primary" type="submit" style="font-size: 14px">
+                        Acceder
+                    </button>
+                </form>
+                <hr class="divider">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Principal Content End -->
+{% endblock %}

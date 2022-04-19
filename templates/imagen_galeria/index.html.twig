@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <!-- Principal Content Start -->
+    <div id="galeria">
+        <div class="container">
+            <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                <h1>GALERIA</h1>
+                <hr>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            {{ form(formulario) }}
+                        </div>
+                    </div>
+                </div>
+                <hr class="divider">
+                {% for message in app.flashes('exito') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <br>
+                <br>
+                <div class="imagenes_galeria">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Visualizaciones</th>
+                            <th scope="col">Likes</th>
+                            <th scope="col">Descargas</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%  for imagen in imagenes %}
+                            <tr>
+                                <th scope="row">{{ imagen.id }}</th>
+                                <td>
+                                    <img src="{{ asset('images/index/gallery/'~imagen.nombre) }}"
+                                         alt="{{ imagen.descripcion }}"
+                                         title="{{ imagen.descripcion }}"
+                                         width="100px"
+                                    >
+                                </td>
+                                <td>{{ imagen.categoria }}</td>
+                                <td>{{ imagen.numVisualizaciones }}</td>
+                                <td>{{ imagen.numLikes }}</td>
+                                <td>{{ imagen.numDownloads }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Principal Content Start -->
+    </div>
+{% endblock %}
